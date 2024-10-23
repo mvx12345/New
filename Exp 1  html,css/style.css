@@ -1,0 +1,13 @@
+.btn{
+    height:20px;
+    color:blue;
+
+}
+.form{
+    color:blue;
+    align-items: 'centre';
+    display:'flex';
+    margin-left: 500px;
+    width:300px;
+    justify-content: 'centre';
+}
