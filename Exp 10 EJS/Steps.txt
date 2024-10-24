@@ -1,0 +1,6 @@
+npm init -y
+
+npm install express ejs body-parser
+
+In public style.css
+In views login.ejs and success.ejs

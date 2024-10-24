@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch All Posts Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        .post {
+            background-color: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .post-title {
+            font-size: 1.5em;
+            color: #333;
+        }
+
+        .post-body {
+            color: #666;
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+    <h1>All Posts</h1>
+    <div id="posts-container">
+        <p>Loading posts...</p>
+    </div>
+
+    <script>
+        const apiUrl = 'https://jsonplaceholder.typicode.com/posts/';
+        const postsContainer = document.getElementById('posts-container');
+
+        // Fetching all posts from the API
+        fetch(apiUrl)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(posts => {
+                // Clear the initial loading message
+                postsContainer.innerHTML = '';
+
+                // Looping through the fetched posts and displaying them
+                posts.forEach(post => {
+                    //if(post.id==1){
+                    const postElement = document.createElement('div');
+                    postElement.classList.add('post');
+
+                    postElement.innerHTML = `
+                        <h2 class="post-title">${post.title}</h2>
+                        <p class="post-body">${post.body}</p>
+                    `;
+
+                    postsContainer.appendChild(postElement);
+            //}
+        });
+            })
+            .catch(error => {
+                console.error("There was an error fetching posts:", error);
+                postsContainer.innerHTML = `<p>There was an error loading the posts. Please try again later.</p>`;
+            });
+    </script>
+</body>
+</html>
